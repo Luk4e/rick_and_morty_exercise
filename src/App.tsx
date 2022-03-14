@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
+import React,{ useState } from 'react';
+import NavbarComp from './components/NavbarComp';
+import NoMatch from './pages/NoMatch';
+import List from './pages/List';
+import Favourite from './pages/Favourite';
+import { IPersonage } from './interfaces/apiInterfaces';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = (): JSX.Element => {
+  const [favouritePersonages, setFavouritePersonages] = useState<IPersonage[]>([]);
+
+  return(
+    <Router>
+      <NavbarComp />
+      <Routes>
+        <Route path="/" element={<List favouritePersonages={favouritePersonages} handleFavourite={setFavouritePersonages} />} />
+        <Route path="/favourite" element={<Favourite favouritePersonages={favouritePersonages} handleFavourite={setFavouritePersonages} />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
