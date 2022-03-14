@@ -1,6 +1,6 @@
 # Rick and Morty Exercise
 
-### 'npm install' 
+### `npm install`
 
 Install dependencies 
 
